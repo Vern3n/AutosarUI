@@ -29,7 +29,7 @@ const ARConfigPanel: React.FC<ARConfigPanelProps> = ({ selectedNode }) => {
         return (
             <div className="empty-state">
                 <div className="empty-state-icon">📋</div>
-                <div className="empty-state-text">Select an item in AR Explorer to view configuration</div>
+                <div className="empty-state-text">Select an item in AR Navigator to view configuration</div>
             </div>
         );
     }

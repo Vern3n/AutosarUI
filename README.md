@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# AutosarUI (AutosarUI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application for viewing and editing AUTOSAR ARXML configurations. This tool provides a rich IDE-like interface with a flexible layout system, allowing users to navigate ARXML structures, configure software components, and inspect properties.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Flexible Layout**: Draggable and resizable panels using `flexlayout-react`.
+-   **AR Navigator**: Tree-based navigation of the AUTOSAR hierarchy.
+-   **SWC Navigator**: Dedicated view for Software Component Types.
+-   **Editor Panel**: Context-aware editing configuration for SW Components.
+-   **Properties View**: Detailed inspection of selected items (Ports, Runnables, etc.).
+-   **Description View**: Quick summary of selected nodes.
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application is built with **React**, **TypeScript**, and **Vite**.
 
-## Expanding the ESLint configuration
+### Key Components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   **`MainLayout.tsx`**: The core container that initializes the `flexlayout-react` model and manages global state (menu actions, view visibility). It uses a factory pattern to render different components based on the layout configuration.
+-   **`layoutConfig.ts`**: Defines the default 3-column layout structure (Navigator | Editor | Properties/Terminal).
+-   **Navigators (`TreeNavigator`, `SwcNavigator`)**: Provide hierarchical views of the data.
+-   **`EditorPanel`**: The main working area, updating based on the selected Software Component.
+-   **`PropertiesPanel`**: Displays attributes of the currently selected item in the editor.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Technology Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+-   **React 19**: UI Library.
+-   **Vite**: Build tool and dev server.
+-   **TypeScript**: Type safety.
+-   **flexlayout-react**: Docking layout manager.
+-   **Lucide React**: Icon set.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+### Prerequisites
+
+-   Node.js (Ensure you have a recent version installed)
+
+### Installation
+
+1.  Clone the repository.
+2.  Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the Application
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the development server:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5193` (or the port shown in your terminal).
+
+### Building for Production
+
+To build the application for production:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist` directory.
+
+### Linting
+
+Run ESLint to check for code quality issues:
+
+```bash
+npm run lint
 ```

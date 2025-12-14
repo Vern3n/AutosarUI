@@ -1,0 +1,45 @@
+@startuml SwcNavigator
+title SwcNavigator Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+class SwcNavigator {
+  - props : SwcNavigatorProps
+  - treeData : SwcNode
+  - selectedId : string | null
+
+  + handleSelect(node: {id, name, type}) : void
+  + handleToggle(nodeId: string) : void
+  + toggleNode(nodes: SwcNode, nodeId: string) : SwcNode
+}
+
+interface SwcNavigatorProps {
+  + onSelect : (node) => void
+}
+
+class TreeNodeComponent {
+  - props : TreeNodeProps
+  + getIcon(type: string) : ReactNode
+}
+
+interface TreeNodeProps {
+  + node : SwcNode
+  + selectedId : string | null
+  + onSelect : (node) => void
+  + onToggle : (nodeId) => void
+  + level : number
+}
+
+SwcNavigator --|> React.Component
+SwcNavigator ..> SwcNavigatorProps : use
+SwcNavigator *-- TreeNodeComponent : renders root
+TreeNodeComponent *-- TreeNodeComponent : renders children recursively
+
+@enduml
+
+SwcNavigator *-- TreeNodeComponent : renders root
+TreeNodeComponent *-- TreeNodeComponent : renders children recursively
+
+@enduml

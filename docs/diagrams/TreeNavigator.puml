@@ -1,0 +1,44 @@
+@startuml TreeNavigator
+title TreeNavigator Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+class TreeNavigator {
+  - props : TreeNavigatorProps
+  - expanded : Record<string, boolean>
+  - selectedId : string | null
+  - filterText : string
+
+  + toggleExpand(id: string, e: React.MouseEvent) : void
+  + handleSelect(node: ARXMLNode) : void
+  + renderTree(nodes: ARXMLNode[], depth: number) : ReactNode
+  + getIcon() : null
+}
+
+interface TreeNavigatorProps {
+  + onSelect : (node: ARXMLNode) => void
+}
+
+interface ARXMLNode {
+  + id : string
+  + label : string
+  + type : string
+  + children : ARXMLNode[]
+  + properties : Record<string, string>
+}
+
+TreeNavigator --|> React.Component
+TreeNavigator ..> TreeNavigatorProps : use
+TreeNavigator ..> ARXMLNode : renders recursive list
+
+@enduml
+
+class TreeNode {
+  - label
+  - children
+}
+
+TreeNavigator --> TreeNode : renders recursive list
+@enduml

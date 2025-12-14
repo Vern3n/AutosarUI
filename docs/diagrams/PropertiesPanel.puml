@@ -1,0 +1,74 @@
+@startuml PropertiesPanel
+title PropertiesPanel Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+class PropertiesPanel {
+  - props : PropertiesPanelProps
+  - activeTab : string ('general' | 'details')
+
+  + handleInputChange(field: string, value: string | boolean) : void
+  + renderPortProperties() : ReactNode
+  + renderSwcProperties() : ReactNode
+  + renderRunnableProperties() : ReactNode
+  + renderProperties() : ReactNode
+}
+
+interface PropertiesPanelProps {
+  + selectedItem : PortData | InternalBehaviorData | RunnableData | null
+  + itemType : string | null
+  + onPropertyChange : (field, value) => void
+}
+
+class PortForm {
+  + Name : text
+  + Type : select (Required/Provided)
+  + Interface : select
+}
+
+class SwcForm {
+  + ShortName : text
+  + Category : select
+  + Description : textarea
+}
+
+class RunnableForm {
+  + Name : text
+  + Symbol : text
+  + CanBeInvokedConcurrently : checkbox
+}
+
+PropertiesPanel --|> React.Component
+PropertiesPanel ..> PropertiesPanelProps : use
+
+PropertiesPanel ..> PortForm : renders (if itemType='port')
+PropertiesPanel ..> SwcForm : renders (if itemType='swc')
+PropertiesPanel ..> RunnableForm : renders (if itemType='runnables')
+
+@enduml
+
+class PortForm {
+  + Name
+  + Type (R-Port/P-Port)
+  + Interface
+}
+
+class SwcForm {
+  + ShortName
+  + Category
+  + Description
+}
+
+class RunnableForm {
+  + Name
+  + Symbol
+  + Concurrency
+}
+
+PropertiesPanel ..> PortForm : renders if itemType='port'
+PropertiesPanel ..> SwcForm : renders if itemType='swc'
+PropertiesPanel ..> RunnableForm : renders if itemType='runnables'
+
+@enduml

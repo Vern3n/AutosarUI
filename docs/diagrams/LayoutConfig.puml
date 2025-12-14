@@ -1,0 +1,67 @@
+@startuml LayoutConfig
+title Default Layout Configuration
+
+object defaultLayoutConfig
+
+object global {
+  tabEnableClose = true
+  tabSetEnableMaximize = true
+}
+
+object root_row {
+  type = "row"
+}
+
+object left_column {
+  type = "row (column config)"
+  weight = 20
+}
+
+object nav_tabset {
+  type = "tabset"
+  weight = 60
+}
+
+object desc_tabset {
+  type = "tabset"
+  weight = 40
+}
+
+object center_right_row {
+  type = "row"
+  weight = 80
+}
+
+object editor_tabset {
+  type = "tabset"
+  weight = 70
+}
+
+object properties_tabset {
+  type = "tabset"
+  weight = 30
+}
+
+defaultLayoutConfig *-- global
+defaultLayoutConfig *-- root_row
+root_row *-- left_column
+root_row *-- center_right_row
+
+left_column *-- nav_tabset
+left_column *-- desc_tabset
+
+center_right_row *-- editor_tabset
+center_right_row *-- properties_tabset
+
+note right of nav_tabset
+  Contains:
+  - AR Navigator
+  - SwcTypes Navigator
+end note
+
+note right of editor_tabset
+  Contains:
+  - SW Component Config
+end note
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml EditorPanel
+title EditorPanel Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+class EditorPanel {
+  - props : EditorPanelProps
+  - activeTab : string ('ports' | 'internal-behaviors' | 'runnables')
+  - selectedRowId : string | null
+
+  + handleRowClick(row: PortData | InternalBehaviorData | RunnableData) : void
+  + renderPortsTable() : ReactNode
+  + renderInternalBehaviorsTable() : ReactNode
+  + renderRunnablesTable() : ReactNode
+  + renderContent() : ReactNode
+}
+
+interface EditorPanelProps {
+  + selectedSwc : { id: string; name: string } | null
+  + onRowSelect : (row, tabType) => void
+}
+
+class Toolbar {
+  + Add
+  + Delete
+  + Move Up/Down
+}
+
+class Tabs {
+  + Ports
+  + Internal Behaviors
+  + Runnables
+}
+
+EditorPanel --|> React.Component
+EditorPanel ..> EditorPanelProps : use
+EditorPanel -- Toolbar : contains
+EditorPanel -- Tabs : manages
+
+note right of EditorPanel::renderContent
+  Switches render method based 
+  on activeTab state
+end note
+@enduml
+
+class Toolbar {
+  + Add
+  + Delete
+  + Move Up/Down
+}
+
+class Tabs {
+  + Ports
+  + Internal Behaviors
+  + Runnables
+}
+
+EditorPanel -- Toolbar : contains
+EditorPanel -- Tabs : manages navigation
+
+note right of EditorPanel::renderContent
+  Switches render method based 
+  on activeTab state
+end note
+@enduml

@@ -1,0 +1,35 @@
+@startuml ARConfigPanel
+title ARConfigPanel Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+
+class ARConfigPanel {
+  - selectedNode : ARXMLNode | null
+  - activeNode : ARXMLNode | null
+  - sectionsOpen : {systemConditions, annotations, ...}
+
+  + toggleSection(section)
+}
+
+package "Layout Structure" {
+  class "Left: Internal Structure" as LeftStruct <<component>> {
+    + TreeNavigator
+  }
+  
+  class "Center: Properties Table" as CenterProps <<component>> {
+    + Table (Name, Value)
+  }
+  
+  class "Right: Sidebar" as RightSidebar <<component>> {
+    + System Conditions
+    + Annotations
+    + Post Build Variants
+  }
+}
+
+ARConfigPanel *-- LeftStruct
+ARConfigPanel *-- CenterProps
+ARConfigPanel *-- RightSidebar
+
+@enduml

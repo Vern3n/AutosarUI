@@ -1,0 +1,51 @@
+@startuml MainLayout
+title MainLayout Component
+
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+class MainLayout {
+  - selectedNode : ARXMLNode | null
+  - selectedSwc : {id, name} | null
+  - selectedItem : PortData | InternalBehaviorData | RunnableData | null
+  - selectedItemType : string | null
+  - model : FlexLayout.Model
+  - activeMenu : string | null
+  - showViewSubMenu : boolean
+
+  + handleMenuClick(e: React.MouseEvent, menuName: string) : void
+  + handleSubMenuClick(e: React.MouseEvent) : void
+  + closeMenu() : void
+  + resetLayout() : void
+  + showView(component: string, name: string) : void
+  + handleARNodeSelect(node: ARXMLNode) : void
+  + handleSwcSelect(node: {id, name, type}) : void
+  + handleRowSelect(row, tabType) : void
+  + factory(node: TabNode) : ReactNode
+}
+
+class "FlexLayout.Layout" as FlexLayoutLayout {
+  + model : Model
+  + factory : Function
+}
+
+MainLayout *-- "1" FlexLayoutLayout : renders
+MainLayout ..> TreeNavigator : renders (via factory)
+MainLayout ..> SwcNavigator : renders (via factory)
+MainLayout ..> EditorPanel : renders (via factory)
+MainLayout ..> PropertiesPanel : renders (via factory)
+MainLayout ..> ARConfigPanel : renders (via factory)
+MainLayout ..> TerminalPanel : renders (via factory)
+
+note right of MainLayout::factory
+  Maps component keys to React components:
+  - "ar_explorer" -> TreeNavigator
+  - "swc_navigator" -> SwcNavigator
+  - "editor_panel" -> EditorPanel
+  - "properties" -> PropertiesPanel
+  - "ar_config_panel" -> ARConfigPanel
+  - "terminal" -> TerminalPanel
+end note
+
+@enduml
