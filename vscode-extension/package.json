@@ -1,0 +1,33 @@
+{
+    "name": "autosar-ui-extension",
+    "displayName": "AutosarUI",
+    "description": "Visual editor for AUTOSAR ARXML configurations",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Visualization",
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "autosar-ui.open",
+                "title": "Open AutosarUI"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.0",
+        "@types/vscode": "^1.80.0",
+        "typescript": "^5.0.0"
+    }
+}

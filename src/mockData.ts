@@ -23,7 +23,7 @@ export const mockARData: ARXMLNode[] = [
                 children: [
                     {
                         id: 'can-hardware-object-1',
-                        label: 'CanHardwareObject "ADASInfo1_ADASInfo1_CHNL_DAT_CANFD_DAT_CA"',
+                        label: 'CanHardwareObject "object1"',
                         type: 'element',
                         properties: {
                             'CanControllerRef': '/RB/UBK/Project/EcucModuleConfigurationValues/Ca...',
@@ -33,12 +33,12 @@ export const mockARData: ARXMLNode[] = [
                     },
                     {
                         id: 'can-hardware-object-2',
-                        label: 'CanHardwareObject "ADASInfo2_ADASInfo2_CHNL_DAT_CANFD_DAT_CA"',
+                        label: 'CanHardwareObject "object2"',
                         type: 'element'
                     },
                     {
                         id: 'can-hardware-object-3',
-                        label: 'CanHardwareObject "ADASInfo3_ADASInfo3_CHNL_DAT_CANFD_DAT_CA"',
+                        label: 'CanHardwareObject "object3"',
                         type: 'element'
                     }
                 ]
